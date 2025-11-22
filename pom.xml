@@ -34,6 +34,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
+		<!-- Spring Security 依赖 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -79,11 +80,6 @@
 		<dependency>
   			<groupId>org.springframework.boot</groupId>
   			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<!-- Spring Security 依赖 -->
-		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-crypto 密码加密依赖-->
 		<dependency>
