@@ -11,7 +11,7 @@ import com.example.park.domain.dto.CarQueryRequestDTO;
 import com.example.park.domain.dto.CarUpdateRequestDTO;
 import com.example.park.domain.dto.CarUpdateResponseDTO;
 import com.example.park.domain.dto.DropRequestDTO;
-import com.example.park.domain.dto.RideRequsetDTO;
+import com.example.park.domain.dto.RideRequestDTO;
 import com.example.park.domain.entity.Car;
 import com.example.park.domain.entity.CarUsage;
 import com.example.park.domain.mapper.CarMapper;
@@ -109,7 +109,7 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
 
     @Override
     @Transactional
-    public void ride(RideRequsetDTO dto,Long userId) {
+    public void ride(RideRequestDTO dto,Long userId) {
         if (dto==null) {
             throw new SystemException(ResultCode.BAD_REQUEST);
         }

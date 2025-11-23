@@ -10,7 +10,7 @@ import com.example.park.domain.dto.CarPageResponseDTO;
 import com.example.park.domain.dto.CarUpdateRequestDTO;
 import com.example.park.domain.dto.CarUpdateResponseDTO;
 import com.example.park.domain.dto.DropRequestDTO;
-import com.example.park.domain.dto.RideRequsetDTO;
+import com.example.park.domain.dto.RideRequestDTO;
 import com.example.park.domain.dto.UserInfoDTO;
 import com.example.park.domain.entity.Car;
 import com.example.park.domain.entity.CarUsage;
@@ -30,7 +30,7 @@ public interface StructMapper {
     void patchCar(CarUpdateRequestDTO dto,@MappingTarget Car car);
     CarUpdateResponseDTO toUpdateDTO(Car car);
 
-    CarUsage toEntity(RideRequsetDTO dto);
+    CarUsage toEntity(RideRequestDTO dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void patchDrop(DropRequestDTO dto,@MappingTarget CarUsage usage);

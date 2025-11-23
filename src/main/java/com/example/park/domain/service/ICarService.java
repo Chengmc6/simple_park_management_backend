@@ -8,7 +8,7 @@ import com.example.park.domain.dto.CarQueryRequestDTO;
 import com.example.park.domain.dto.CarUpdateRequestDTO;
 import com.example.park.domain.dto.CarUpdateResponseDTO;
 import com.example.park.domain.dto.DropRequestDTO;
-import com.example.park.domain.dto.RideRequsetDTO;
+import com.example.park.domain.dto.RideRequestDTO;
 import com.example.park.domain.entity.Car;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -25,6 +25,6 @@ public interface ICarService extends IService<Car> {
     void carDelete(CarDeleteRequestDTO dto,Integer role);
     PageResult<CarPageResponseDTO> pageInfo(CarQueryRequestDTO dto);
     CarUpdateResponseDTO carUpdate(CarUpdateRequestDTO dto,Integer role);
-    void ride(RideRequsetDTO dto,Long userId);
+    void ride(RideRequestDTO dto,Long userId);
     void drop(DropRequestDTO dto,Long userId);
 }

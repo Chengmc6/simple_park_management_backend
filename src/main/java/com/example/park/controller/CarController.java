@@ -19,7 +19,7 @@ import com.example.park.domain.dto.CarQueryRequestDTO;
 import com.example.park.domain.dto.CarUpdateRequestDTO;
 import com.example.park.domain.dto.CarUpdateResponseDTO;
 import com.example.park.domain.dto.DropRequestDTO;
-import com.example.park.domain.dto.RideRequsetDTO;
+import com.example.park.domain.dto.RideRequestDTO;
 import com.example.park.domain.service.ICarService;
 
 import jakarta.validation.Valid;
@@ -66,7 +66,7 @@ public class CarController {
     }
 
     @PostMapping("/ride")
-    public ApiResponse<Void> ride(RideRequsetDTO dto,
+    public ApiResponse<Void> ride(RideRequestDTO dto,
             @AuthenticationPrincipal CustomerUserDetails userDetails){
         iCarService.ride(dto, userDetails.getId());
         return ApiResponse.success();

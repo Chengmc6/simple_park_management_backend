@@ -1,6 +1,5 @@
 package com.example.park.common;
 
-import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +22,7 @@ public class CustomerUserDetailsService implements UserDetailsService{
         if(user==null){
             throw new UsernameNotFoundException(username+"ユーザー名は存在しません");
         }
-        return new CustomerUserDetails(user.getId(), user.getUsername(), user.getPassword(), user.getRole(),Collections.emptyList());
+        return new CustomerUserDetails(user.getId(), user.getUsername(), user.getPassword(), user.getRole());
     }
 
 }

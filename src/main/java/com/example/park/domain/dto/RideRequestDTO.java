@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class RideRequsetDTO {
+public class RideRequestDTO {
     private Long carId;
     private Long userId;
     private LocalDateTime rideTime;

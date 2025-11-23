@@ -1,5 +1,6 @@
 package com.example.park.domain.service.impl;
 
+import com.example.park.common.AuthenticationService;
 import com.example.park.common.CustomerUserDetails;
 import com.example.park.common.JwtUtils;
 import com.example.park.common.ResultCode;
@@ -16,10 +17,6 @@ import com.example.park.domain.service.IUserService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,17 +31,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
+    private final StructMapper structMapper;
+    private final AuthenticationService authenticationService;
 
-    @Autowired
-    private StructMapper structMapper;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserServiceImpl(UserMapper userMapper,PasswordEncoder passwordEncoder,
+                           StructMapper structMapper,AuthenticationService authenticationService){
+        this.userMapper=userMapper;
+        this.passwordEncoder=passwordEncoder;
+        this.structMapper=structMapper;
+        this.authenticationService=authenticationService;
+    }
 
     @Override
     public void register(UserRegisterDTO dto) {
@@ -76,12 +74,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             throw new SystemException(ResultCode.SERVER_ERROR);
         }
         //ユーザーデータの認証
-        UsernamePasswordAuthenticationToken authenticationToken=
-                new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword());
-        
-        Authentication authentication=authenticationManager.authenticate(authenticationToken);
-        //認証成功したら、認証対象からユーザーデータを取る
-        CustomerUserDetails userDetails=(CustomerUserDetails)authentication.getPrincipal();
+        CustomerUserDetails userDetails=authenticationService.authenticateUser(dto.getUsername(), dto.getPassword());
         //tokenを生成する
         String token=JwtUtils.getToken(userDetails.getId(), userDetails.getUsername(),userDetails.getRole());
 

@@ -1,7 +1,6 @@
 package com.example.park.common;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -36,8 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
                     userId,
                     username,
                     null,
-                    role,
-                    Collections.emptyList()
+                    role
             );
 
             // Spring Security の認証トークンを作成
