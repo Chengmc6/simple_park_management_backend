@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -33,14 +32,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarUsageServiceImpl extends ServiceImpl<CarUsageMapper, CarUsage> implements ICarUsageService {
 
-    @Autowired
-    private CarUsageMapper carUsageMapper;
+    
+    private final CarUsageMapper carUsageMapper;
 
-    @Autowired
-    private UserMapper userMapper;
+    
+    private final UserMapper userMapper;
 
-    @Autowired
-    private CarMapper carMapper;
+    
+    private final CarMapper carMapper;
+
+    public CarUsageServiceImpl(CarUsageMapper carUsageMapper,UserMapper userMapper,CarMapper carMapper){
+        this.carUsageMapper=carUsageMapper;
+        this.userMapper=userMapper;
+        this.carMapper=carMapper;
+    }
     /**
      * 查询指定车辆的使用履历（分页）
      * 指定された車両の使用履歴をページングして取得する

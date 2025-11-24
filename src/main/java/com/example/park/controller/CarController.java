@@ -1,7 +1,6 @@
 package com.example.park.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,20 +35,21 @@ import jakarta.validation.Valid;
 @RequestMapping("/park/car")
 public class CarController {
 
-    @Autowired
-    private ICarService iCarService;
+    private final ICarService iCarService;
+
+    public CarController(ICarService iCarService){
+        this.iCarService=iCarService;
+    }
 
     @PostMapping
-    public ApiResponse<Void> carAdd(@RequestBody @Valid CarAddRequestDTO dto,
-            @AuthenticationPrincipal CustomerUserDetails userDetails){
-        iCarService.carAdd(dto,userDetails.getRole());
+    public ApiResponse<Void> carAdd(@RequestBody @Valid CarAddRequestDTO dto){
+        iCarService.carAdd(dto);
         return ApiResponse.success();
     }
 
     @PostMapping("/delete")
-    public ApiResponse<Void> carDelete(@RequestBody @Valid CarDeleteRequestDTO dto,
-            @AuthenticationPrincipal CustomerUserDetails userDetails){
-        iCarService.carDelete(dto, userDetails.getRole());
+    public ApiResponse<Void> carDelete(@RequestBody @Valid CarDeleteRequestDTO dto){
+        iCarService.carDelete(dto);
         return ApiResponse.success();
     }
 
@@ -59,9 +59,8 @@ public class CarController {
     }
 
     @PostMapping("/update")
-    public ApiResponse<CarUpdateResponseDTO> update(@RequestBody @Valid CarUpdateRequestDTO dto,
-            @AuthenticationPrincipal CustomerUserDetails userDetails){
-        CarUpdateResponseDTO responseDTO=iCarService.carUpdate(dto, userDetails.getRole());
+    public ApiResponse<CarUpdateResponseDTO> update(@RequestBody @Valid CarUpdateRequestDTO dto){
+        CarUpdateResponseDTO responseDTO=iCarService.carUpdate(dto);
         return ApiResponse.success(responseDTO);
     }
 

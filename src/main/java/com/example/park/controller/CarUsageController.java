@@ -1,7 +1,6 @@
 package com.example.park.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,8 +24,11 @@ import com.example.park.domain.service.ICarUsageService;
 @RequestMapping("/park/car-usage")
 public class CarUsageController {
 
-    @Autowired
-    private ICarUsageService usageService;
+    private final ICarUsageService usageService;
+
+    public CarUsageController(ICarUsageService usageService){
+        this.usageService=usageService;
+    }
 
     @PostMapping("/history")
     public ApiResponse<PageResult<UsageResponseVO>> history(UsageRequestDTO dto){

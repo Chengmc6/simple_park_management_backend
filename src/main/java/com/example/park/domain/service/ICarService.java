@@ -21,10 +21,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2025-10-15
  */
 public interface ICarService extends IService<Car> {
-    void carAdd(CarAddRequestDTO dto,Integer role);
-    void carDelete(CarDeleteRequestDTO dto,Integer role);
+    void carAdd(CarAddRequestDTO dto);
+    void carDelete(CarDeleteRequestDTO dto);
     PageResult<CarPageResponseDTO> pageInfo(CarQueryRequestDTO dto);
-    CarUpdateResponseDTO carUpdate(CarUpdateRequestDTO dto,Integer role);
+    CarUpdateResponseDTO carUpdate(CarUpdateRequestDTO dto);
     void ride(RideRequestDTO dto,Long userId);
     void drop(DropRequestDTO dto,Long userId);
 }

@@ -1,7 +1,6 @@
 package com.example.park.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +34,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/park/user")
 public class UserController {
 
-    @Autowired
-    private IUserService iService;
+    private final IUserService iService;
+
+    public UserController(IUserService userService){
+        this.iService=userService;
+    }
 
     //新規登録インターフェース
     @PostMapping

@@ -25,7 +25,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -41,17 +41,24 @@ import org.springframework.util.StringUtils;
 @Service
 public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarService {
 
-    @Autowired
-    private CarMapper carMapper;
+    
+    private final CarMapper carMapper;
 
-    @Autowired
-    private CarUsageMapper carUsageMapper;
+   
+    private final CarUsageMapper carUsageMapper;
 
-    @Autowired
-    private StructMapper structMapper;
+    
+    private final StructMapper structMapper;
 
+    public CarServiceImpl(CarMapper carMapper,CarUsageMapper carUsageMapper,StructMapper structMapper){
+        this.carMapper=carMapper;
+        this.carUsageMapper=carUsageMapper;
+        this.structMapper=structMapper;
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
-    public void carAdd(CarAddRequestDTO dto,Integer role) {
+    public void carAdd(CarAddRequestDTO dto) {
         if (dto==null) {
             throw new SystemException(ResultCode.BAD_REQUEST);
         }
@@ -59,13 +66,11 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         carMapper.insert(car);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
-    public void carDelete(CarDeleteRequestDTO dto,Integer role) {
+    public void carDelete(CarDeleteRequestDTO dto) {
         if (dto==null) {
             throw new SystemException(ResultCode.BAD_REQUEST);
-        }
-        if(role!=1){
-            throw new SystemException(ResultCode.ILLEGAL_PERMISSION);
         }
         UpdateWrapper<Car> wrapper=new UpdateWrapper<>();
         wrapper.in("id", dto.getIds())
@@ -90,19 +95,20 @@ public class CarServiceImpl extends ServiceImpl<CarMapper, Car> implements ICarS
         return PageUtils.build(carPage, car -> structMapper.toDTO(car));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
-    public CarUpdateResponseDTO carUpdate(CarUpdateRequestDTO dto, Integer role) {
+    public CarUpdateResponseDTO carUpdate(CarUpdateRequestDTO dto) {
         if (dto==null) {
             throw new SystemException(ResultCode.BAD_REQUEST);
-        }
-        if(role!=1){
-            throw new SystemException(ResultCode.ILLEGAL_PERMISSION);
         }
         Car car=carMapper.selectById(dto.getId());
         if(car.getIsDeleted()){
             throw new SystemException(ResultCode.NOT_FOUND);
         }
         structMapper.patchCar(dto, car);
+
+        carMapper.updateById(car);
+
         CarUpdateResponseDTO responseDTO=structMapper.toUpdateDTO(car);
         return responseDTO;
     }
