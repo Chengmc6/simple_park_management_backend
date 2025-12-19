@@ -1,6 +1,8 @@
 package com.example.park.controller;
 
 
+import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,12 +44,14 @@ public class CarController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<Void> carAdd(@RequestBody @Valid CarAddRequestDTO dto){
         iCarService.carAdd(dto);
         return ApiResponse.success();
     }
 
     @PostMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<Void> carDelete(@RequestBody @Valid CarDeleteRequestDTO dto){
         iCarService.carDelete(dto);
         return ApiResponse.success();
