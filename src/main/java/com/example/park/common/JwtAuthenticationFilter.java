@@ -25,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
         String token=JwtUtils.extractToken(request.getHeader("Authorization"));
         
         // トークンが存在し、有効期限が切れていない場合に認証処理を行う
-        if(token!=null && JwtUtils.isTokenExpired(token)){
+        if(token!=null && !JwtUtils.isTokenExpired(token)){
             Long userId=JwtUtils.getUserID(token);
             String username=JwtUtils.getUsername(token);
             Integer role=JwtUtils.getRole(token);

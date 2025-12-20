@@ -21,7 +21,7 @@ import com.example.park.domain.entity.User;
 @Mapper(componentModel = "spring")
 public interface StructMapper {
 
-    @Mapping(target = "createdAT", source = "createdAt")
+    @Mapping(target = "createdAt", source = "createdAt")
     UserInfoDTO toInfoDTO(User user);
     
     @Mapping(target = "id", ignore = true)

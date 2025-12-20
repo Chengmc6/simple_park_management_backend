@@ -8,5 +8,5 @@ import lombok.Data;
 public class UserInfoDTO {
     private Long id;
     private String username;
-    private LocalDateTime createdAT;
+    private LocalDateTime createdAt;
 }

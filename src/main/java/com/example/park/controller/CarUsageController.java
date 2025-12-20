@@ -2,6 +2,7 @@ package com.example.park.controller;
 
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class CarUsageController {
     }
 
     @PostMapping("/history")
-    public ApiResponse<PageResult<UsageResponseVO>> history(UsageRequestDTO dto){
+    public ApiResponse<PageResult<UsageResponseVO>> history(@RequestBody UsageRequestDTO dto){
         PageResult<UsageResponseVO> result=usageService.history(dto);
         return ApiResponse.success(result);
     }
