@@ -89,12 +89,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
             throw new SystemException(ResultCode.LOGIN_FAILED);
         }
-        //ユーザーデータの認証
+        
+        //tokenを生成する（使用数据库中的用户数据直接生成token，不再进行二次认证）
         CustomerUserDetails userDetails=authenticationService.authenticateUser(dto.getUsername(), dto.getPassword());
-        //tokenを生成する
-        String token=JwtUtils.getToken(userDetails.getId(), userDetails.getUsername(),userDetails.getRole());
+        String token = JwtUtils.getToken(userDetails.getId(), userDetails.getUsername(), userDetails.getRole());
 
-        return new UserLoginResponseDTO(userDetails.getId(),userDetails.getUsername(),token);
+        return new UserLoginResponseDTO(userDetails.getId(), userDetails.getUsername(), token);
     }
 
     @Override
