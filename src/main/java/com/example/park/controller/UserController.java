@@ -18,6 +18,7 @@ import com.example.park.domain.service.IUserService;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @RestController
 @RequestMapping("/park/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     private final IUserService iService;
@@ -55,7 +57,7 @@ public class UserController {
     //ユーザーメッセージインターフェース
     @GetMapping("/me")
     public ApiResponse<UserInfoDTO> info(@AuthenticationPrincipal CustomerUserDetails userDetails){
-        Long userId=userDetails.getId();
+        Long userId=userDetails.getUserId();
         UserInfoDTO dto=iService.info(userId);
         return ApiResponse.success(dto);
     }
@@ -63,7 +65,7 @@ public class UserController {
     @PostMapping("/password_change")
     public ApiResponse<Void> changePassword(@RequestBody @Valid UserPasswordChangeDTO dto,
             @AuthenticationPrincipal CustomerUserDetails userDetails){
-        Long userId=userDetails.getId();
+        Long userId=userDetails.getUserId();
         iService.changePassword(userId, dto);
         return ApiResponse.success();
     }

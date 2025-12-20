@@ -70,14 +70,14 @@ public class CarController {
     @PostMapping("/ride")
     public ApiResponse<Void> ride(@RequestBody @Valid RideRequestDTO dto,
             @AuthenticationPrincipal CustomerUserDetails userDetails){
-        iCarService.ride(dto, userDetails.getId());
+        iCarService.ride(dto, userDetails.getUserId());
         return ApiResponse.success();
     }
 
     @PostMapping("/drop")
     public ApiResponse<Void> drop(@RequestBody @Valid DropRequestDTO dto,
             @AuthenticationPrincipal CustomerUserDetails userDetails){
-        iCarService.drop(dto, userDetails.getId());
+        iCarService.drop(dto, userDetails.getUserId());
         return ApiResponse.success();
     }
 }

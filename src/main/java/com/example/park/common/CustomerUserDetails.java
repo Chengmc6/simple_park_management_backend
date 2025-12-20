@@ -11,13 +11,13 @@ import lombok.Getter;
 
 @Getter
 public class CustomerUserDetails implements UserDetails{
-    private final Long id;
+    private final Long userId;
     private final String username;
     private final String password;
     private final Integer role;
     private final Collection<? extends GrantedAuthority> authorities;
-    public CustomerUserDetails(Long id,String username,String password,Integer role){
-        this.id=id;
+    public CustomerUserDetails(Long userId,String username,String password,Integer role){
+        this.userId=userId;
         this.username=username;
         this.password=password;
         this.role=role;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -16,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;// 引入 CORS 相关
 import org.springframework.web.cors.CorsConfigurationSource; // 引入 CORS 相关
@@ -58,8 +60,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // 🌟 解决 CORS 核心问题：允许所有 OPTIONS 请求通过
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/park/user/login","/park/user/register").permitAll()//ユーザーはログインページと新規ページがアクセスできるように設定する
+                .requestMatchers("/park/user/login","/park/user").permitAll()//ユーザーはログインページと新規ページがアクセスできるように設定する
                 .anyRequest().authenticated()
+            ).exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)//ユーザー名とパスワードの認証前にJWTの検証をする
             .build();

@@ -92,9 +92,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         
         //tokenを生成する（使用数据库中的用户数据直接生成token，不再进行二次认证）
         CustomerUserDetails userDetails=authenticationService.authenticateUser(dto.getUsername(), dto.getPassword());
-        String token = JwtUtils.getToken(userDetails.getId(), userDetails.getUsername(), userDetails.getRole());
+        String token = JwtUtils.getToken(userDetails.getUserId(), userDetails.getUsername(), userDetails.getRole());
 
-        return new UserLoginResponseDTO(userDetails.getId(), userDetails.getUsername(), token);
+        return new UserLoginResponseDTO(userDetails.getUserId(), userDetails.getUsername(), token);
     }
 
     @Override
