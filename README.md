@@ -4,6 +4,21 @@
 
 このプロジェクトは、Spring Boot を使用して構築されたシンプルな駐車場管理システムです。ユーザーの登録・認証、車両情報の管理、および駐車場の利用履歴を効率的に管理するための RESTful API を提供します。複数のユーザーが複数の車両を共有利用する環境に対応しており、各利用者のアルコールチェックなどの安全管理機能も組み込まれています。
 
+本プロジェクトは、Java / Spring Boot を用いた
+実務レベルの Web API 設計・実装力の習得を目的として作成しました。
+
+## 設計意図（設計方針）
+
+本プロジェクトでは、実務での保守性・可読性を意識し、以下の方針で設計・実装を行いました。
+
+- Controller 層ではリクエストの受付とレスポンス制御のみを担当し、
+  ビジネスロジックは Service 層に集約
+- DTO と Entity を分離し、MapStruct を用いて変換処理を統一
+- 認証・認可処理は Spring Security に集約し、
+  業務ロジックとセキュリティ処理を分離
+- レスポンス形式を統一し、フロントエンドとの連携を容易に設計
+- 包括的な例外処理とエラーハンドリングを実装し、ユーザーに分かりやすいエラーメッセージを提供
+
 ## 主な機能
 
 ✅ **ユーザー管理**
@@ -43,7 +58,7 @@
 |------|----------|------|
 | Java | 17 | プログラミング言語 |
 | Spring Boot | 3.4.10 | フレームワーク |
-| Spring Security | 3.x | セキュリティ・認証 |
+| Spring Security | 6.x | セキュリティ・認証 |
 | MyBatis-Plus | - | ORM フレームワーク |
 | MapStruct | - | オブジェクト変換 |
 | MySQL/MariaDB | - | データベース |
@@ -133,8 +148,8 @@ src/
 #### 1. リポジトリをクローン
 
 ```bash
-git clone https://github.com/Chengmc6/simple_park_management.git
-cd simple_park_management
+git clone https://github.com/Chengmc6/simple_park_management_backend.git
+cd simple_park_management_backend
 ```
 
 #### 2. データベースを初期化
@@ -206,6 +221,16 @@ mvn spring-boot:run
 | POST | `/park/usage/drop` | 降車処理 |
 | GET | `/park/usage/list` | 利用履歴一覧取得 |
 | GET | `/park/usage/{id}` | 利用履歴詳細取得 |
+
+## フロントエンドとの連携
+
+本バックエンドは、以下のフロントエンドリポジトリと連携して動作します。
+
+- Frontend Repository  
+  https://github.com/Chengmc6/simple_park_management_frontend
+
+JWT 認証を用いた SPA 構成で、ログイン後は Authorization ヘッダーを通じて
+API へアクセスします。
 
 ## 使用例
 
@@ -372,8 +397,8 @@ Table 'database.user' doesn't exist
 ## 作者
 
 **GAOMING**
-- バックエンドアーキテクト
-- Java & Spring Boot エキスパート
+- Java / Spring Boot を中心に学習中
+- バックエンド開発を志望
 - GitHub: [Chengmc6](https://github.com/Chengmc6)
 
 ## 改版履歴
