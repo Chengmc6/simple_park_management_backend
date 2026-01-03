@@ -1,8 +1,5 @@
 package com.example.park.domain.service.impl;
 
-import com.example.park.common.AuthenticationService;
-import com.example.park.common.CustomerUserDetails;
-import com.example.park.common.JwtUtils;
 import com.example.park.common.ResultCode;
 import com.example.park.common.SystemException;
 import com.example.park.domain.converter.StructMapper;
@@ -13,7 +10,10 @@ import com.example.park.domain.dto.UserPasswordChangeDTO;
 import com.example.park.domain.dto.UserRegisterDTO;
 import com.example.park.domain.entity.User;
 import com.example.park.domain.mapper.UserMapper;
+import com.example.park.domain.service.AuthenticationService;
 import com.example.park.domain.service.IUserService;
+import com.example.park.security.CustomerUserDetails;
+import com.example.park.security.JwtUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 

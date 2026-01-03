@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.park.common.ApiResponse;
-import com.example.park.common.CustomerUserDetails;
 import com.example.park.domain.dto.UserInfoDTO;
 import com.example.park.domain.dto.UserLoginRequestDTO;
 import com.example.park.domain.dto.UserLoginResponseDTO;
 import com.example.park.domain.dto.UserPasswordChangeDTO;
 import com.example.park.domain.dto.UserRegisterDTO;
 import com.example.park.domain.service.IUserService;
+import com.example.park.security.CustomerUserDetails;
 
 import jakarta.validation.Valid;
 

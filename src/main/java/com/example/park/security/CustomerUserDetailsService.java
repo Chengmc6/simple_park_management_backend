@@ -1,4 +1,4 @@
-package com.example.park.common;
+package com.example.park.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

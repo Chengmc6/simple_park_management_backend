@@ -1,9 +1,11 @@
-package com.example.park.common;
+package com.example.park.domain.service;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+
+import com.example.park.security.CustomerUserDetails;
 
 @Service
 public class AuthenticationService {

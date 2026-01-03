@@ -1,4 +1,4 @@
-package com.example.park.common;
+package com.example.park.security;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;

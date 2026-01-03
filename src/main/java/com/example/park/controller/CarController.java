@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.park.common.ApiResponse;
-import com.example.park.common.CustomerUserDetails;
 import com.example.park.common.PageResult;
 import com.example.park.domain.dto.CarAddRequestDTO;
 import com.example.park.domain.dto.CarDeleteRequestDTO;
@@ -21,6 +20,7 @@ import com.example.park.domain.dto.CarUpdateResponseDTO;
 import com.example.park.domain.dto.DropRequestDTO;
 import com.example.park.domain.dto.RideRequestDTO;
 import com.example.park.domain.service.ICarService;
+import com.example.park.security.CustomerUserDetails;
 
 import jakarta.validation.Valid;
 
