@@ -108,12 +108,16 @@ src/
 │   │   │   ├── ApiResponse.java            - 統一レスポンス形式
 │   │   │   ├── ResultCode.java             - ステータスコード
 │   │   │   ├── SystemException.java        - カスタム例外
-│   │   │   ├── JwtUtils.java               - JWT 処理
-│   │   │   ├── JwtAuthenticationFilter.java - JWT フィルター
-│   │   │   ├── AuthenticationService.java  - 認証サービス
-│   │   │   ├── SecurityConfig.java         - セキュリティ設定
+│   │   │   ├── PageResult.java             - ページ結果オブジェクト
 │   │   │   ├── PageUtils.java              - ページング処理
 │   │   │   └── UserRole.java               - ロール定義
+│   │   │
+│   │   ├── security/
+│   │   │   ├── CustomerUserDetails.java
+│   │   │   ├── CustomerUserDetailsService.java
+│   │   │   ├── JwtAuthenticationFilter.java - JWT フィルター
+│   │   │   ├── JwtUtils.java               - JWT 処理
+│   │   │   └── SecurityConfig.java         - セキュリティ設定
 │   │   │
 │   │   └── advice/
 │   │       ├── GlobalExceptionHandler.java - 例外ハンドラー
